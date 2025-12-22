@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 
+
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +23,7 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 
+    public Category(String name) {
+
+    }
 }
