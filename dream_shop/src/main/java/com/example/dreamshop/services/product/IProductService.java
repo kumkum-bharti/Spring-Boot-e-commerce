@@ -2,6 +2,7 @@ package com.example.dreamshop.services.product;
 
 import com.example.dreamshop.model.Product;
 import com.example.dreamshop.requests.AddProductRequest;
+import com.example.dreamshop.requests.ProductUpdateRequest;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ public interface IProductService {
 
     void deleteProductById(Long id);
     void updateProductById(Long id);
+
+    Product updateProductById(ProductUpdateRequest request, Long productId);
 
     List<Product> getAllProducts();
     Product getProductById(Long id);
