@@ -10,7 +10,6 @@ public interface IProductService {
     Product addProduct (AddProductRequest product);
 
     void deleteProductById(Long id);
-    void updateProductById(Long id);
 
     Product updateProductById(ProductUpdateRequest request, Long productId);
 
@@ -23,9 +22,5 @@ public interface IProductService {
     List<Product> getProductByBrandAndNAme(String brand,String name);
 
     Long countProductsByBrandAndName(String brand,String name);
-
-
-
-
 
 }

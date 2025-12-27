@@ -49,10 +49,6 @@ public class ProductService implements IProductService {
                  });
     }
 
-    @Override
-    public void updateProductById(Long id) {
-
-    }
 
     @Override
     public Product updateProductById(ProductUpdateRequest request, Long productId) {
@@ -85,12 +81,13 @@ public class ProductService implements IProductService {
         return productRepository.findById(id)
                 .orElseThrow(()->new ProductNotFoundException("Product not found!"));
     }
-
+    //error thrown else productobject will be undefined
     @Override
     public List<Product> getProductByCategory(String category) {
 
         return productRepository.findByCategoryName(category);
     }
+    //we have not thrown error as returned list can be empty
 
     @Override
     public List<Product> getProductByBrand(String brand) {
