@@ -3,11 +3,10 @@ package com.example.dreamshop.controller;
 import com.example.dreamshop.exceptions.ResourceNotFoundException;
 import com.example.dreamshop.model.Product;
 import com.example.dreamshop.requests.AddProductRequest;
+import com.example.dreamshop.requests.ProductUpdateRequest;
 import com.example.dreamshop.response.ApiResponse;
-import com.example.dreamshop.services.category.CategoryService;
 import com.example.dreamshop.services.product.IProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RestController
 @RequestMapping("{api.prefix}/products")
 
-public class ProductCategory {
+public class ProductController {
     private final IProductService productService;
 
     @GetMapping("/all")
@@ -53,8 +52,32 @@ public class ProductCategory {
         }
     }
 
-    
+    @PostMapping("/products/{productId}/update")
+    public ResponseEntity<ApiResponse> updateProduct(@RequestBody ProductUpdateRequest request,@PathVariable Long productId){
+        try {
+            Product theProduct=productService.updateProductById(request,productId);
+            return ResponseEntity.ok(new  ApiResponse("Update product success",theProduct));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
+        }
+    }
 
+    @DeleteMapping ("products/{productId}/delete")
+    public ResponseEntity<ApiResponse> deleteProduct(@PathVariable Long productId){
+        try {
+            productService.deleteProductById(productId);
+            return ResponseEntity.ok(new ApiResponse("Delete product success",null));
+        }
+        catch(ResourceNotFoundException e){
+            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
+        }
+    }
 
+    @GetMapping("/products/getProductByBrandAndName")
+    public ResponseEntity<ApiResponse> getProductByBrandAndName(@PathVariable String brand, @PathVariable String name){
+        try{
+            List<Product> products=productService.getProductByBrandAndNAme()
+        }
+    }
 
 }

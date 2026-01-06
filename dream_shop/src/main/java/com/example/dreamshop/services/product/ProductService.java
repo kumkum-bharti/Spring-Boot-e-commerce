@@ -57,7 +57,7 @@ public class ProductService implements IProductService {
                 .map(productRepository :: save)
                 .orElseThrow(()-> new ProductNotFoundException("Product Not Found!"));
 
-    }
+}
 
     public Product updateExistingProduct(Product existingProduct, ProductUpdateRequest request){
         existingProduct.setName(request.getName());
