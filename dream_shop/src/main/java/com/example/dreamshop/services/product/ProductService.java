@@ -84,8 +84,8 @@ public class ProductService implements IProductService {
     //error thrown else productobject will be undefined
     @Override
     public List<Product> getProductByCategory(String category) {
-
-        return productRepository.findByCategoryName(category);
+        System.out.println("CATEGORY RECEIVED = " + category);
+        return productRepository.findByCategory_Name(category);
     }
     //we have not thrown error as returned list can be empty
 
@@ -98,7 +98,7 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getProductByCategoryAndBrand(String category, String brand) {
 
-        return productRepository.findByCategoryNameAndBrand(category,brand);
+        return productRepository.findByCategory_NameAndBrand(category,brand);
     }
 
     @Override

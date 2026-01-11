@@ -5,8 +5,8 @@ import com.example.dreamshop.exceptions.ResourceNotFoundException;
 import com.example.dreamshop.model.Image;
 import com.example.dreamshop.response.ApiResponse;
 import com.example.dreamshop.services.Image.IImageService;
-import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -43,7 +43,7 @@ public class ImageController {
         ByteArrayResource resource=new ByteArrayResource(image.getImage().getBytes(1,(int) image.getImage().length()));
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(image.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=\"" + image.getFileName() +"\"")
-                .body((Resource) resource);
+                .body(resource);
 
     }
 
