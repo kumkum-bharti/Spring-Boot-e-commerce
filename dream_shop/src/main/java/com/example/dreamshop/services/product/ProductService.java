@@ -1,5 +1,6 @@
 package com.example.dreamshop.services.product;
 
+import com.example.dreamshop.dto.ImageDto;
 import com.example.dreamshop.dto.ProductDto;
 import com.example.dreamshop.exceptions.ProductNotFoundException;
 import com.example.dreamshop.model.Category;
@@ -126,8 +127,18 @@ public class ProductService implements IProductService {
         return productRepository.countByBrandAndName(brand,name);
     }
 
+//    public List<ProductDto> getConvertedProducts()List<Product products{
+//
+//    }
+
+    @Override
     public ProductDto convertToDto(Product product) {
         ProductDto productDto= modelMapper.map(product, ProductDto.class);
-        List<Image> images=imageRepository.findById(product.getId());
-    }
+        List<Image> images=imageRepository.findByProductId(product.getId());
+        List<ImageDto> imageDtos=images.stream()
+                .map(image->modelMapper.map(image, ImageDto.class)).toList();
+
+        productDto.setImages(imageDtos);
+        return productDto;
+   }
 }
