@@ -1,6 +1,6 @@
 package com.example.dreamshop.controller;
 
-import com.example.dreamshop.dto.productDto;
+import com.example.dreamshop.dto.ProductDto;
 import com.example.dreamshop.exceptions.ResourceNotFoundException;
 import com.example.dreamshop.model.Product;
 import com.example.dreamshop.requests.AddProductRequest;
@@ -47,7 +47,7 @@ public class ProductController {
     public ResponseEntity<ApiResponse> addProduct(@RequestBody AddProductRequest product){
         try {
             Product theProduct=productService.addProduct(product);
-            productDto response = new productDto();
+            ProductDto response = new ProductDto();
             response.setId(theProduct.getId());
             response.setName(theProduct.getName());
             response.setBrand(theProduct.getBrand());

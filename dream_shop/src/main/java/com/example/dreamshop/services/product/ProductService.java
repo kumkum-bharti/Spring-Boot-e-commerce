@@ -1,13 +1,17 @@
 package com.example.dreamshop.services.product;
 
+import com.example.dreamshop.dto.ProductDto;
 import com.example.dreamshop.exceptions.ProductNotFoundException;
 import com.example.dreamshop.model.Category;
+import com.example.dreamshop.model.Image;
 import com.example.dreamshop.model.Product;
 import com.example.dreamshop.repository.CategoryRepository;
+import com.example.dreamshop.repository.ImageRepository;
 import com.example.dreamshop.repository.ProductRepository;
 import com.example.dreamshop.requests.AddProductRequest;
 import com.example.dreamshop.requests.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +22,9 @@ import java.util.Optional;
 public class ProductService implements IProductService {
     private final ProductRepository productRepository; // so as req annotation can get it and no one can change it later
     private final CategoryRepository categoryRepository;
+    private final ModelMapper modelMapper;
+    private final ImageRepository imageRepository;
+
     @Override
 
     public Product addProduct(AddProductRequest request) {
@@ -117,5 +124,10 @@ public class ProductService implements IProductService {
     public Long countProductsByBrandAndName(String brand, String name) {
 
         return productRepository.countByBrandAndName(brand,name);
+    }
+
+    public ProductDto convertToDto(Product product) {
+        ProductDto productDto= modelMapper.map(product, ProductDto.class);
+        List<Image> images=imageRepository.findById(product.getId());
     }
 }
