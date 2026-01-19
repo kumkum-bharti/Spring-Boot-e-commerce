@@ -81,6 +81,7 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getAllProducts() {
+
         return productRepository.findAll();
     }
 
@@ -127,9 +128,10 @@ public class ProductService implements IProductService {
         return productRepository.countByBrandAndName(brand,name);
     }
 
-//    public List<ProductDto> getConvertedProducts()List<Product products{
-//
-//    }
+    @Override
+    public List<ProductDto> getConvertedProducts(List<Product> products){
+            return products.stream().map(product->convertToDto(product)).toList();
+    }
 
     @Override
     public ProductDto convertToDto(Product product) {
