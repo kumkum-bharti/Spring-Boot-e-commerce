@@ -1,19 +1,29 @@
 package com.example.dreamshop.services.cart;
 
+import com.example.dreamshop.exceptions.ResourceNotFoundException;
 import com.example.dreamshop.model.Cart;
+import com.example.dreamshop.model.CartItem;
 import com.example.dreamshop.repository.CartRepository;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
 @Service
-@NoArgsConstructor
+@RequiredArgsConstructor
+
 public class CartService implements ICartService {
     private final CartRepository cartRepository;
+    private final CartItemRepository cartItemRepository;
+
     @Override
     public Cart getCart(Long id){
-        return null;
+        Cart cart=cartRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Cart not Found"));
+
+        BigDecimal totalAmount=cart.getTotalAmount();
+        cart.setTotalAmount(totalAmount);
+        return cartRepository.save(cart);
     }
 
     @Override
@@ -25,4 +35,6 @@ public class CartService implements ICartService {
     public BigDecimal getTotalPrice(Long id){
         return null;
     }
+
+
 }
