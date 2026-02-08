@@ -28,12 +28,16 @@ public class CartService implements ICartService {
 
     @Override
     public void clearCart(Long id){
-
+        Cart cart=getCart(id);
+        cartItemRepository.deleteAllBycartId(id);
+        cart.getItems().clear();
+        cartRepository.deleteById(id);
     }
 
     @Override
     public BigDecimal getTotalPrice(Long id){
-        return null;
+        Cart cart=getCart(id);
+        return cart.getTotalAmount();
     }
 
 
