@@ -2,9 +2,8 @@ package com.example.dreamshop.services.cart;
 
 import com.example.dreamshop.exceptions.ResourceNotFoundException;
 import com.example.dreamshop.model.Cart;
-import com.example.dreamshop.model.CartItem;
 import com.example.dreamshop.repository.CartRepository;
-import lombok.NoArgsConstructor;
+import com.example.dreamshop.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ import java.math.BigDecimal;
 
 public class CartService implements ICartService {
     private final CartRepository cartRepository;
-    private final CartItemRepository cartItemRepository;
+    private final CategoryRepository.CartItemRepository cartItemRepository;
 
     @Override
     public Cart getCart(Long id){

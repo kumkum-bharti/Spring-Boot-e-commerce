@@ -48,4 +48,6 @@ public class Cart {
         }).reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
+    public void setQuantity(int quantity) {
+    }
 }
