@@ -1,7 +1,9 @@
 package com.example.dreamshop.services.product;
 
+import com.example.dreamshop.dto.ProductDto;
 import com.example.dreamshop.model.Product;
 import com.example.dreamshop.requests.AddProductRequest;
+import com.example.dreamshop.requests.ProductUpdateRequest;
 
 import java.util.List;
 
@@ -9,7 +11,8 @@ public interface IProductService {
     Product addProduct (AddProductRequest product);
 
     void deleteProductById(Long id);
-    void updateProductById(Long id);
+
+    Product updateProductById(ProductUpdateRequest request, Long productId);
 
     List<Product> getAllProducts();
     Product getProductById(Long id);
@@ -17,12 +20,11 @@ public interface IProductService {
     List<Product> getProductByBrand(String brand);
     List<Product> getProductByCategoryAndBrand(String category,String brand);
     List<Product> getProductByName(String name);
-    List<Product> getProductByBrandAndNAme(String brand,String name);
+    List<Product> getProductByBrandAndName(String brand,String name);
 
     Long countProductsByBrandAndName(String brand,String name);
 
+    List<ProductDto> getConvertedProducts(List<Product> products);
 
-
-
-
+    ProductDto convertToDto(Product product);
 }
